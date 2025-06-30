@@ -1,26 +1,31 @@
 import logging
-import sys
+import os
+from datetime import datetime
 
+log = logging.getLogger("eCommLogger")
+log.setLevel(logging.DEBUG)
 
 LOG_FORMAT = "%(asctime)s — %(levelname)s — %(message)s"
-LOG_LEVEL = logging.DEBUG
 
 
-def get_logger(name=__name__):
-    logger = logging.getLogger(name)
+def setup_file_logger(scenario_name: str, logs_dir: str):
+    """Set up logger for each scenario with a unique log file."""
+    global log
+    log.handlers.clear()
 
-    if not logger.handlers:
-        logger.setLevel(LOG_LEVEL)
+    os.makedirs(logs_dir, exist_ok=True)
 
-        # Console Handler
-        console_handler = logging.StreamHandler(sys.stdout)
-        console_handler.setLevel(LOG_LEVEL)
-        console_formatter = logging.Formatter(LOG_FORMAT)
-        console_handler.setFormatter(console_formatter)
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    file_name = f"{'_'.join(scenario_name.split()).strip()}_{timestamp}_logs.log"
+    log_file_path = os.path.join(logs_dir, file_name)
 
-        logger.addHandler(console_handler)
+    # File handler
+    file_handler = logging.FileHandler(log_file_path, mode='a', encoding='utf-8')
+    file_handler.setFormatter(logging.Formatter(LOG_FORMAT))
+    log.addHandler(file_handler)
 
-    return logger
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(logging.Formatter(LOG_FORMAT))
+    log.addHandler(console_handler)
 
-
-log = get_logger("eCommLogger")
+    return log_file_path

@@ -8,3 +8,4 @@ Feature: User login
     Examples:
       | username      |
       | standard_user |
+      |problem_user   |

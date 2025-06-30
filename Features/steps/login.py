@@ -19,7 +19,7 @@ def step_enter_username_and_password(context, username):
 
 @then("the user should see the products page")
 def step_check_user_is_on_products_page(context):
-    context.login.verify_on_products_page()
+    assert context.login.verify_on_products_page(), "Login failed, not on products page."
 
 
 
