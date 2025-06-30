@@ -1,0 +1,12 @@
+[
+  {
+    "latitude": "19.0760",
+    "longitude": "72.8777",
+    "expected_city": "Mumbai"
+  },
+  {
+    "latitude": "40.7128",
+    "longitude": "-74.0060",
+    "expected_city": "New York"
+  }
+]

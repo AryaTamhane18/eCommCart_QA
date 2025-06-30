@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Sauce Labs Backpack",
+    "id": "sauce-labs-backpack",
+    "price": "$29.99"
+  },
+  {
+    "name": "Sauce Labs Onesie",
+    "id": "sauce-labs-onesie",
+    "price": "$7.99"
+  }
+]
